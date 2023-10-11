@@ -5,14 +5,26 @@ from datetime import datetime
 from uuid import uuid4
 
 
+fmt = "%Y-%m-%dT%H:%M:%S.%f"
+
+
 class BaseModel:
     """Base class for all classes"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Instastiate the base model"""
-        self.id = str(uuid4())
-        self.created_at = datetime.utcnow()
-        self.updated_at = datetime.utcnow()
+        if kwargs:
+            kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
+                                                     fmt)
+            kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
+                                                     fmt)
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
 
     def __str__(self):
         """Override the str representation of class"""
