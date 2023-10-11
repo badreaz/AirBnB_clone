@@ -30,5 +30,5 @@ class TestBaseModel(unittest.TestCase):
         my_model.save()
         json_model = my_model.to_dict()
         self.assertEqual(json_model["__class__"], "BaseModel")
-        self.assertEqual(json_model["my_number"], str(my_model.my_number))
-        self.assertEqual(jjson_model["name"], my_model.name)
+        self.assertEqual(json_model["my_number"], my_model.my_number)
+        self.assertEqual(json_model["name"], my_model.name)
