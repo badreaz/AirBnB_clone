@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ The entry point of the command interpreter """
 import cmd
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """ represents the command interpreter
@@ -38,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if not args[0]:
+        if not args:
             print("** class name missing **")
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
@@ -53,13 +54,13 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if not args[0]:
+        if not args:
             print("** class name missing **")
             return
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif not args[1]:
+        elif len(args) < 2:
             print("** instance id missing **")
             return
         objs = storage.all()
@@ -76,13 +77,13 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if not args[0]:
+        if not args:
             print("** class name missing **")
             return
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif not args[1]:
+        elif len(args) < 2:
             print("** instance id missing **")
             return
         objs = storage.all()
@@ -113,13 +114,13 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if not args[0]:
+        if not args:
             print("** class name missing **")
             return
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif not args[1]:
+        elif len(args) < 2:
             print("** instance id missing **")
             return
         objs = storage.all()
@@ -127,10 +128,10 @@ class HBNBCommand(cmd.Cmd):
         if not objs[k]:
             print("** no instance found **")
             return
-        if not args[2]:
+        if len(args) < 3:
             print("** attribute name missing **")
             return
-        elif not args[3]:
+        elif len(args) < 4:
             print("** value missing **")
             return
         objs[k].name = args[2]
