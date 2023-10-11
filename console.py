@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """ creates a new instance of a class,
+        """ Creates a new instance of a class,
         saves it (to JSON file) and prints id
         """
 
@@ -47,27 +47,94 @@ class HBNBCommand(cmd.Cmd):
             print(new.id)
 
     def do_show(self, arg):
-        """ prints the string representation of an instance
+        """ Prints the string representation of an instance
         based on the class name and id
         """
 
         args = arg.split()
-        if !arg[0]:
+        if !args[0]:
             print("** class name missing **")
             return
-        elif arg[0] != "BaseModel":
+        elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif !arg[1]:
+        elif !args[1]:
             print("** instance id missing **")
             return
         objs = storage.all()
-        k = "{}.{}".format(arg[0], arg[1])
+        k = "{}.{}".format(args[0], args[1])
         instance = objs[k]
         if !instance:
             print("** no instance found **")
             return
         print(instance)
+
+    def do_destroy(self, arg):
+        """ Deletes an instance based on the class name ann id
+        (save the change into the JSON file)
+        """
+
+        args = arg.split()
+        if !args[0]:
+            print("** class name missing **")
+            return
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        elif !args[1]:
+            print("** instance id missing **")
+            return
+        objs = storage.all()
+        k = "{}.{}".format(args[0], args[1])
+        if !objs[k]:
+            print("** no instance found **")
+            return
+        del objs[k]
+        storage.save()
+
+    def do_all(self, arg):
+        """ Prints all string representation of all instances
+        based or not on the class name
+        """
+
+        if arg and arg != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        objs = storage.all()
+        for instance in objs.values():
+            if arg and type(instance).__name__ != arg:
+                continue
+            print(str(instance))
+
+    def do_update(self, arg):
+        """ Updates an instance based on the class name and id by
+        adding or updating attribute (save the change into the JSON file)
+        """
+
+        args = arg.split()
+        if !args[0]:
+            print("** class name missing **")
+            return
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        elif !args[1]:
+            print("** instance id missing **")
+            return
+        objs = storage.all()
+        k = "{}.{}".format(args[0], args[1])
+        if !objs[k]:
+            print("** no instance found **")
+            return
+        if !args[2]:
+            print("** attribute name missing **")
+            return
+        elif !args[3]:
+            print("** value missing **")
+            return
+        objs[k].name = args[2]
+        objs[k].my_number = int(args[3])
+        storage.save()
 
 
 
