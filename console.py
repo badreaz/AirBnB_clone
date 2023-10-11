@@ -37,9 +37,10 @@ class HBNBCommand(cmd.Cmd):
         saves it (to JSON file) and prints id
         """
 
-        if (!arg):
+        args = arg.split()
+        if not args[0]:
             print("** class name missing **")
-        elif arg != "BaseModel":
+        elif args[0] != "BaseModel":
             print("** class doesn't exist **")
         else:
             new = BaseModel()
@@ -52,19 +53,19 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if !args[0]:
+        if not args[0]:
             print("** class name missing **")
             return
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif !args[1]:
+        elif not args[1]:
             print("** instance id missing **")
             return
         objs = storage.all()
         k = "{}.{}".format(args[0], args[1])
         instance = objs[k]
-        if !instance:
+        if not instance:
             print("** no instance found **")
             return
         print(instance)
@@ -75,18 +76,18 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if !args[0]:
+        if not args[0]:
             print("** class name missing **")
             return
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif !args[1]:
+        elif not args[1]:
             print("** instance id missing **")
             return
         objs = storage.all()
         k = "{}.{}".format(args[0], args[1])
-        if !objs[k]:
+        if not objs[k]:
             print("** no instance found **")
             return
         del objs[k]
@@ -112,24 +113,24 @@ class HBNBCommand(cmd.Cmd):
         """
 
         args = arg.split()
-        if !args[0]:
+        if not args[0]:
             print("** class name missing **")
             return
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
-        elif !args[1]:
+        elif not args[1]:
             print("** instance id missing **")
             return
         objs = storage.all()
         k = "{}.{}".format(args[0], args[1])
-        if !objs[k]:
+        if not objs[k]:
             print("** no instance found **")
             return
-        if !args[2]:
+        if not args[2]:
             print("** attribute name missing **")
             return
-        elif !args[3]:
+        elif not args[3]:
             print("** value missing **")
             return
         objs[k].name = args[2]
