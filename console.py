@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ The entry point of the command interpreter """
 import cmd
+import re
 from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
@@ -8,6 +9,13 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+
+    def precmd(self, line):
+        """ Execute instructions before the command line 'line' is interpreted
+        """
+
+        if not line:
+            return '\n'
 
     def do_quit(self, arg):
         """ Quit command to exit the program
