@@ -29,14 +29,14 @@ class HBNBCommand(cmd.Cmd):
         if not line:
             return '\n'
         regex = re.compile(r"(\w+)\.(\w+)\((.*)\)")
-        matches = regex.search(line)
+        matches = regex.findall(line)
         if not matches:
             return super().precmd(line)
         args = matches[0]
         if len(args) < 3:
             return f"{args[1]} {args[0]}"
         else:
-            attr = args.split(", ")
+            attr = args[2].split(", ")
             if len(attr) == 1:
                 return f"{args[1]} {args[0]} {attr[0]}"
             else:
