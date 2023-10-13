@@ -4,6 +4,13 @@ import cmd
 import re
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.review import Review
+
 
 classes = {'BaseModel': BaseModel, 'User': User,
             'Amenity': Amenity, 'City': City, 'State': State,
@@ -16,10 +23,10 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    """
     def precmd(self, line):
-        """ Execute instructions before the command line 'line' is interpreted
-        """
-        """
+        "" Execute instructions before the command line 'line' is interpreted
+        ""
         if not line:
             return '\n'
         """
@@ -56,10 +63,12 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
+            return
         elif args[0] not in classes.keys():
             print("** class doesn't exist **")
+            return
         else:
-            new = classes[arg[0]]()
+            new = classes[args[0]]()
             new.save()
             print(new.id)
 
@@ -80,11 +89,10 @@ class HBNBCommand(cmd.Cmd):
             return
         objs = storage.all()
         k = "{}.{}".format(args[0], args[1])
-        instance = objs[k]
-        if not instance:
+        if k not in objs:
             print("** no instance found **")
             return
-        print(instance)
+        print(objs[k])
 
     def do_destroy(self, arg):
         """ Deletes an instance based on the class name ann id
@@ -103,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             return
         objs = storage.all()
         k = "{}.{}".format(args[0], args[1])
-        if not objs[k]:
+        if k not in objs:
             print("** no instance found **")
             return
         del objs[k]
@@ -140,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
             return
         objs = storage.all()
         k = "{}.{}".format(args[0], args[1])
-        if not objs[k]:
+        if k not in objs:
             print("** no instance found **")
             return
         if len(args) < 3:
