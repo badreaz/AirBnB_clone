@@ -3,6 +3,7 @@
 import cmd
 import re
 from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """ represents the command interpreter
