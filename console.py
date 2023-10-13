@@ -1,13 +1,28 @@
 #!/usr/bin/python3
 """ The entry point of the command interpreter """
 import cmd
+import re
 from models.base_model import BaseModel
+from models import storage
+
+classes = {'BaseModel': BaseModel, 'User': User,
+            'Amenity': Amenity, 'City': City, 'State': State,
+            'Place': Place, 'Review': Review}
+
 
 class HBNBCommand(cmd.Cmd):
     """ represents the command interpreter
     """
 
     prompt = "(hbnb) "
+
+    def precmd(self, line):
+        """ Execute instructions before the command line 'line' is interpreted
+        """
+        """
+        if not line:
+            return '\n'
+        """
 
     def do_quit(self, arg):
         """ Quit command to exit the program
@@ -41,10 +56,10 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in classes.keys():
             print("** class doesn't exist **")
         else:
-            new = BaseModel()
+            new = classes[arg[0]]()
             new.save()
             print(new.id)
 
@@ -57,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args[0] != "BaseModel":
+        elif args[0] not in classes.keys():
             print("** class doesn't exist **")
             return
         elif len(args) < 2:
@@ -80,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args[0] != "BaseModel":
+        elif args[0] not in classes.keys():
             print("** class doesn't exist **")
             return
         elif len(args) < 2:
@@ -99,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         based or not on the class name
         """
 
-        if arg and arg != "BaseModel":
+        if arg and arg not in classes.keys():
             print("** class doesn't exist **")
             return
         objs = storage.all()
@@ -117,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args[0] != "BaseModel":
+        elif args[0] not in classes.keys():
             print("** class doesn't exist **")
             return
         elif len(args) < 2:
