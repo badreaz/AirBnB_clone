@@ -34,6 +34,13 @@ class HBNBCommand(cmd.Cmd):
             return super().precmd(line)
         args = matches[0]
         if len(args) < 3:
+            if args[1] == "count":
+                objs = storage.all()
+                count = 0
+                for v in objs.values():
+                    if type(v).__name__ == args[0]: 
+                        count += 1
+                return f"{count}"
             return f"{args[1]} {args[0]}"
         else:
             attr = args[2].split(", ")
