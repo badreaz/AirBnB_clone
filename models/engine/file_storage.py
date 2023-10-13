@@ -2,7 +2,13 @@
 """File storage class"""
 
 import json
-import models
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
+from models.state import State
+from models.city import City
 
 
 class FileStorage:
@@ -33,7 +39,7 @@ class FileStorage:
         """Deserialize JSON file to __objects if it exists"""
         classes = {
                 "BaseModel": BaseModel, "User": User, "Place": Place,
-                "Amenity": Amenity, "City": City, "Review", Review,
+                "Amenity": Amenity, "City": City, "Review": Review,
                 "State": State}
         try:
             with open(FileStorage.__file_path, "r") as fd:
