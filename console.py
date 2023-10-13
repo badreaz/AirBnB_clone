@@ -13,8 +13,8 @@ from models.review import Review
 
 
 classes = {'BaseModel': BaseModel, 'User': User,
-            'Amenity': Amenity, 'City': City, 'State': State,
-            'Place': Place, 'Review': Review}
+           'Amenity': Amenity, 'City': City, 'State': State,
+           'Place': Place, 'Review': Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -173,8 +173,7 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     """ main function to run the interpreter """
 
     HBNBCommand().cmdloop()
