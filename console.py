@@ -14,9 +14,10 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, line):
         """ Execute instructions before the command line 'line' is interpreted
         """
-
+        """
         if not line:
             return '\n'
+        """
 
     def do_quit(self, arg):
         """ Quit command to exit the program
