@@ -23,13 +23,24 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    """
     def precmd(self, line):
-        "" Execute instructions before the command line 'line' is interpreted
-        ""
+        """ Execute instructions before the command line 'line' is interpreted
+        """
         if not line:
             return '\n'
-        """
+        regex = re.compile(r"(\w+)\.(\w+)\((.*)\)")
+        matches = regex.search(line)
+        if not matches:
+            return super().precmd(line)
+        args = matches[0]
+        if len(args) < 3:
+            return f"{args[1]} {args[0]}"
+        else:
+            attr = args.split(", ")
+            if len(attr) == 1:
+                return f"{args[1]} {args[0]} {attr[0]}"
+            else:
+                return f"{args[1]} {args[0]} {attr[0]} {attr[1]} {attr[2]}"
 
     def do_quit(self, arg):
         """ Quit command to exit the program
