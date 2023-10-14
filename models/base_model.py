@@ -29,7 +29,7 @@ class BaseModel:
 
     def __str__(self):
         """Override the str representation of class"""
-        return f"[{type(self).__name__}] ({self.id}) ({self.__dict__})"
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Updates updated_at attr with current time"""
