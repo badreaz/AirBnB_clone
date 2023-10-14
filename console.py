@@ -2,6 +2,7 @@
 """ The entry point of the command interpreter """
 import cmd
 import re
+import json
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -33,21 +34,31 @@ class HBNBCommand(cmd.Cmd):
         if not matches:
             return super().precmd(line)
         args = matches[0]
-        if len(args) < 3:
+        if not args[2]:
             if args[1] == "count":
                 objs = storage.all()
                 count = 0
                 for v in objs.values():
                     if type(v).__name__ == args[0]: 
                         count += 1
-                return f"{count}"
+                print(f"{count}")
+                return '\n'
             return f"{args[1]} {args[0]}"
         else:
             attr = args[2].split(", ")
             if len(attr) == 1:
-                return f"{args[1]} {args[0]} {attr[0]}"
+                id = re.sub("[\"\']", "", attr[0])
+                return f"{args[1]} {args[0]} {id}"
             else:
-                return f"{args[1]} {args[0]} {attr[0]} {attr[1]} {attr[2]}"
+                dic_json = re.findall(r"{.*}", args[2])
+                if dic_json:
+                    id = re.sub("[\"\']", "", attr[0])
+                    dic = re.sub("\'", "\"", dic_json[0])
+                    return f"{args[1]} {args[0]} {id} {dic}"
+                id = re.sub("[\"\']", "", attr[0])
+                attr1 = re.sub("[\"\']", "", attr[1])
+                attr2 = re.sub("[\"\']", "", attr[2])
+                return f"{args[1]} {args[0]} {id} {attr1} {attr2}"
 
     def do_quit(self, arg):
         """ Quit command to exit the program
@@ -59,6 +70,7 @@ class HBNBCommand(cmd.Cmd):
         """ EOF command to catch end of a file
         """
 
+        print()
         return 1
 
     def do_help(self, arg):
@@ -165,9 +177,19 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         objs = storage.all()
-        k = "{}.{}".format(args[0], args[1])
-        if k not in objs:
+        key = "{}.{}".format(args[0], args[1])
+        if key not in objs:
             print("** no instance found **")
+            return
+        dic_json = re.findall(r"{.*}", arg)
+        if dic_json:
+            try:
+                dic = json.loads(dic_json[0])
+            except Exception:
+                return
+            for k, v in dic.items():
+                setattr(objs[key], k, v)
+            storage.save()
             return
         if len(args) < 3:
             print("** attribute name missing **")
@@ -175,8 +197,22 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 4:
             print("** value missing **")
             return
-        objs[k].name = args[2]
-        objs[k].my_number = int(args[3])
+        attr = re.findall(r"^[\"\'](.*?)[\"\']", args[3])
+        if attr:
+            setattr(objs[key], args[2], attr[0])
+        else:
+            value = re.sub("\"", "", args[3])
+            if '.' in value:
+                try:
+                    value = float(value)
+                except ValueError:
+                    pass
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    pass
+            setattr(objs[key], args[2], value)
         storage.save()
 
 
