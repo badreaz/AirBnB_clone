@@ -39,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
                 objs = storage.all()
                 count = 0
                 for v in objs.values():
-                    if type(v).__name__ == args[0]: 
+                    if type(v).__name__ == args[0]:
                         count += 1
                 print(f"{count}")
                 return '\n'
