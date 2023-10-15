@@ -6,8 +6,8 @@ The goal of this project is to create a server copy of the AirBnB website(hbnb).
 #  Command Interpreter Description
 
 # How to start the command
-You can start the command interpreter in interactive mode like:
-'''shell  
+You can start the command interpreter in interactive mode like:   
+'''bash
 $ ./console.py   
 (hbnb) help    
     
@@ -39,7 +39,7 @@ Documented commands (type help <topic>):
 EOF  help  quit    
 (hbnb)     
 $   
-'''   
+'''  
    
 # How to use the command
 quit and EOF: exit the program. Ex: quit    
