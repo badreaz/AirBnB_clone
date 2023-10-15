@@ -4,8 +4,9 @@ import unittest
 from models.base_model import BaseModel
 from models import storage
 
+
 class TestBaseModel(unittest.TestCase):
-    
+    """Test for BaseModel class"""
     def test_no_args(self):
         self.assertEqual(BaseModel, type(BaseModel()))
 
@@ -24,7 +25,7 @@ class TestBaseModel(unittest.TestCase):
         my_model.my_number = 89
         my_model.save()
         self.assertNotEqual(my_model.created_at, my_model.updated_at)
-    
+
     def test_to_dict(self):
         my_model = BaseModel()
         my_model.name = "My First Model"
