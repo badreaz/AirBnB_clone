@@ -38,9 +38,8 @@ class BaseModel:
 
     def to_dict(self):
         """Returns dict containing key/values of instance"""
-        fmt = "%Y-%m-%dT%H:%M:%S.%f"
         cls_dict = self.__dict__.copy()
         cls_dict["__class__"] = type(self).__name__
-        cls_dict["created_at"] = cls_dict["created_at"].strftime(fmt)
-        cls_dict["updated_at"] = cls_dict["updated_at"].strftime(fmt)
+        cls_dict["created_at"] = cls_dict["created_at"].isoformat()
+        cls_dict["updated_at"] = cls_dict["updated_at"].isoformat()
         return cls_dict
