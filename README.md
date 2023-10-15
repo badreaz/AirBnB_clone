@@ -7,7 +7,8 @@ The goal of this project is to create a server copy of the AirBnB website(hbnb).
 
 # How to start the command
 You can start the command interpreter in interactive mode like:
-''' $ ./console.py
+'''shell 
+$ ./console.py
 ''' (hbnb) help
 ''' 
 ''' Documented commands (type help <topic>):
