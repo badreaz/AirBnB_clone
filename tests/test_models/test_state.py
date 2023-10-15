@@ -8,7 +8,7 @@ class TestState(unittest.TestCase):
 
     def setUp(self):
         self.state = State()
-    
+
     def test_init(self):
         self.assertIsInstance(self.state, State)
 
