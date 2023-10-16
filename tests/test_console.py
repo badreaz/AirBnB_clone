@@ -6,6 +6,7 @@ import sys
 import unittest
 from io import StringIO
 from unittest.mock import patch
+import models
 from models import storage
 from models.engine.file_storage import FileStorage
 import console
@@ -24,4 +25,7 @@ class TestHBNBCommand(unittest.HBNBCommand):
             pass
 
     def test_prompt(self):
-        self.assertEqual("(hbnb)", self.command.prompt())
+        self.assertEqual("(hbnb)", self.command.prompt)
+
+    def test_quit(self):
+        self.assertTrue(self.command.onecmd("quit"))
