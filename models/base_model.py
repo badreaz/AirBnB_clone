@@ -14,13 +14,12 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instastiate the base model"""
         if kwargs:
-            kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
-                                                     fmt)
-            kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
-                                                     fmt)
             for key, value in kwargs.items():
                 if key != "__class__":
-                    setattr(self, key, value)
+                    if key == "created_at" or key == "updated_at":
+                        setattr(self, key, datetime.strptime(value, fmt))
+                    else:
+                        setattr(self, key, value)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
