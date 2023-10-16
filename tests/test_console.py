@@ -8,7 +8,9 @@ from io import StringIO
 from unittest.mock import patch
 from models import storage
 from models.engine.file_storage import FileStorage
+import console
 from console import HBNBCommand
+
 
 class TestHBNBCommand(unittest.HBNBCommand):
     """Unittest for HBNB Command"""
@@ -19,4 +21,7 @@ class TestHBNBCommand(unittest.HBNBCommand):
         try:
             os.remove("file.json")
         except Exception:
-            pass 
+            pass
+
+    def test_prompt(self):
+        self.assertEqual("(hbnb)", self.command.prompt())
