@@ -2,6 +2,7 @@
 """ Review class tests module """
 import unittest
 from models.review import Review
+from models.base_model import BaseModel
 
 
 class TestReview(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestReview(unittest.TestCase):
 
     def test_init(self):
         self.assertIsInstance(self.review, Review)
+        self.assertIsInstance(self.review, BaseModel)
 
     def test_attributes(self):
         attrs = vars(self.review)

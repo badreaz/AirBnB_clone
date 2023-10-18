@@ -2,6 +2,7 @@
 """ Place class tests module """
 import unittest
 from models.place import Place
+from models.base_model import BaseModel
 
 
 class TestPlace(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestPlace(unittest.TestCase):
 
     def test_init(self):
         self.assertIsInstance(self.place, Place)
+        self.assertIsInstance(self.place, BaseModel)
 
     def test_attributes(self):
         attrs = vars(self.place)
