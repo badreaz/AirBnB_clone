@@ -2,6 +2,7 @@
 """ City class tests module """
 import unittest
 from models.city import City
+from models.base_model import BaseModel
 
 
 class TestCity(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestCity(unittest.TestCase):
 
     def test_init(self):
         self.assertIsInstance(self.city, City)
+        self.assertIsInstance(self.city, BaseModel)
 
     def test_attributes(self):
         attrs = vars(self.city)
