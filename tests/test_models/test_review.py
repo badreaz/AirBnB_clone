@@ -31,3 +31,12 @@ class TestReview(unittest.TestCase):
     def test_text(self):
         self.review.text = "text"
         self.assertEqual(self.review.text, "text")
+
+    def test_attribute_none(self):
+        """Test if user attributes can handle None"""
+        self.review.place_id = None
+        self.review.user_id = None
+        self.review.text = None
+        self.assertIsNone(self.review.place_id)
+        self.assertIsNone(self.review.user_id)
+        self.assertIsNone(self.review.text)
