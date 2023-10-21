@@ -2,6 +2,7 @@
 """ Amenity class tests module """
 import unittest
 from models.amenity import Amenity
+from models.base_model import BaseModel
 
 
 class TestAmenity(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestAmenity(unittest.TestCase):
 
     def test_init(self):
         self.assertIsInstance(self.amenity, Amenity)
+        self.assertIsInstance(self.amenity, BaseModel)
 
     def test_attributes(self):
         attrs = vars(self.amenity)
@@ -21,3 +23,4 @@ class TestAmenity(unittest.TestCase):
     def test_name(self):
         self.amenity.name = "amenity name"
         self.assertEqual(self.amenity.name, "amenity name")
+        self.assertIsInstance(self.amenity.name, str)

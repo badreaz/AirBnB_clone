@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ unittests for the BaseModel class """
 import unittest
+import copy
 from models.base_model import BaseModel
 from models import storage
 
@@ -24,7 +25,10 @@ class TestBaseModel(unittest.TestCase):
         my_model.name = "My First Model"
         my_model.my_number = 89
         my_model.save()
+        new_model = copy.deepcopy(my_model)
+        new_model.save()
         self.assertNotEqual(my_model.created_at, my_model.updated_at)
+        self.assertNotEqual(new_model.updated_at, my_model.updated_at)
 
     def test_to_dict(self):
         my_model = BaseModel()

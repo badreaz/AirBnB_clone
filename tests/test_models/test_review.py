@@ -2,6 +2,7 @@
 """ Review class tests module """
 import unittest
 from models.review import Review
+from models.base_model import BaseModel
 
 
 class TestReview(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestReview(unittest.TestCase):
 
     def test_init(self):
         self.assertIsInstance(self.review, Review)
+        self.assertIsInstance(self.review, BaseModel)
 
     def test_attributes(self):
         attrs = vars(self.review)
@@ -29,3 +31,12 @@ class TestReview(unittest.TestCase):
     def test_text(self):
         self.review.text = "text"
         self.assertEqual(self.review.text, "text")
+
+    def test_attribute_none(self):
+        """Test if user attributes can handle None"""
+        self.review.place_id = None
+        self.review.user_id = None
+        self.review.text = None
+        self.assertIsNone(self.review.place_id)
+        self.assertIsNone(self.review.user_id)
+        self.assertIsNone(self.review.text)

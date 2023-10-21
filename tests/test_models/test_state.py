@@ -2,6 +2,7 @@
 """ State class test module """
 import unittest
 from models.state import State
+from models.base_model import BaseModel
 
 
 class TestState(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestState(unittest.TestCase):
 
     def test_init(self):
         self.assertIsInstance(self.state, State)
+        self.assertIsInstance(self.state, BaseModel)
 
     def test_attributes(self):
         attrs = vars(self.state)
