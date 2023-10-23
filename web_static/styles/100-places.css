@@ -75,17 +75,19 @@
 .places .amenities,
 .places .reviews {
 	margin-top: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
-.places .amenities {
-	width: 50px;
-	height: 50px;
+.tv,
+.wifi,
+.pets {
+	width: 20px;
+	height: 20px;
 	background-size: cover;
 	background-repeat: no-repeat;
-}
-
-.places .reviews {
-	width: 100%;
+	display: inline-block;
 }
 
 .places .amenities h2,
@@ -95,21 +97,24 @@
 	text-align: left;
 }
 
+.places .amenities ul {
+}
 .places .amenities ul,
-.places .reviewss ul {
+.places .reviews ul {
 	list-style-type: none;
-	padding: 0;
+	display: flex;
+ 	flex-direction: column;
 }
 
-.places .amenities tv {
+.places .amenities .tv {
 	background-image: url("../images/icon_tv.png")
 }
 
-.places .amenities wifi {
+.places .amenities .wifi {
 	background-image: url("../images/icon_wifi.png")
 }
 
-.places .amenities pets {
+.places .amenities .pets {
 	background-image: url("../images/icon_pets.png")
 }
 
