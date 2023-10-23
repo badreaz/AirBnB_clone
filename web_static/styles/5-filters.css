@@ -26,7 +26,8 @@
 .amenities {
 	height: 100%;
 	width: 25%;
-	float: left;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .locations {
